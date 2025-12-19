@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { PdfViewer } from "@/components/pdf-viewer/core";
 
 export default function Home() {
   return (
@@ -24,14 +25,31 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="rounded-3xl border border-white/40 bg-white/70 p-8 text-sm text-slate-600 shadow-xl backdrop-blur">
-          <h2 className="text-lg font-semibold text-slate-900">
-            Project status
-          </h2>
-          <p className="mt-3 max-w-2xl">
-            The frontend shell is ready. Next up: PDF rendering, zoom controls,
-            and bbox overlays.
-          </p>
+        <section className="grid gap-8 lg:grid-cols-[2fr,1fr]">
+          <PdfViewer fileUrl="/sample.pdf" />
+          <aside className="rounded-3xl border border-white/40 bg-white/70 p-6 text-sm text-slate-600 shadow-xl backdrop-blur">
+            <h2 className="text-lg font-semibold text-slate-900">
+              Active Highlights
+            </h2>
+            <div className="mt-4 space-y-3">
+              <div className="rounded-2xl border border-rose-200 bg-rose-50/70 p-4">
+                <p className="text-sm font-semibold text-rose-700">
+                  Clause 2.1 — Liability
+                </p>
+                <p className="mt-2 text-xs text-rose-600">
+                  Needs human review due to ambiguous indemnity wording.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-amber-200 bg-amber-50/70 p-4">
+                <p className="text-sm font-semibold text-amber-700">
+                  Payment terms
+                </p>
+                <p className="mt-2 text-xs text-amber-600">
+                  PDF preview ready for bbox overlay.
+                </p>
+              </div>
+            </div>
+          </aside>
         </section>
       </main>
     </div>
