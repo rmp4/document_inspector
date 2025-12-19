@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.router import api_router
+from app.engine.parser import get_converter
 
 
 def create_app() -> FastAPI:
@@ -16,6 +17,10 @@ def create_app() -> FastAPI:
     @app.get("/health")
     def health() -> dict[str, str]:
         return {"status": "ok"}
+
+    @app.on_event("startup")
+    def preload_models() -> None:
+        get_converter()
 
     app.include_router(api_router, prefix="/api/v1")
     return app
