@@ -12,3 +12,5 @@ node_modules/
 .next/
 dist/
 build/
+backend/output/
+test.pdf

@@ -11,8 +11,10 @@ class DoclingBBox:
 
 
 def normalize_bbox(bbox: DoclingBBox, page_height: float) -> list[float]:
-    x = bbox.left
-    y = page_height - bbox.top
-    w = bbox.right - bbox.left
-    h = bbox.bottom - bbox.top
+    x = min(bbox.left, bbox.right)
+    w = abs(bbox.right - bbox.left)
+    top_edge = max(bbox.top, bbox.bottom)
+    bottom_edge = min(bbox.top, bbox.bottom)
+    y = page_height - top_edge
+    h = top_edge - bottom_edge
     return [x, y, w, h, float(bbox.page_no)]
