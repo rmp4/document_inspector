@@ -1,3 +1,7 @@
+import asyncio
+import os
+import sys
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -24,7 +28,8 @@ def create_app() -> FastAPI:
     @app.on_event("startup")
     async def preload_models() -> None:
         init_db()
-        get_converter()
+        if os.environ.get("SKIP_DOCLING_INIT") != "1":
+            get_converter()
         await init_checkpointer()
 
     @app.on_event("shutdown")
@@ -34,5 +39,8 @@ def create_app() -> FastAPI:
     app.include_router(api_router, prefix="/api/v1")
     return app
 
+
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 app = create_app()

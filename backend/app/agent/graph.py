@@ -9,7 +9,14 @@ def _audit(state: AuditState) -> AuditState:
 
 
 def _human_review(state: AuditState) -> AuditState:
-    return interrupt({"state": state, "action": "human_review"})
+    resume_value = interrupt({"state": state, "action": "human_review"})
+    if isinstance(resume_value, dict):
+        decision = str(resume_value.get("decision", "approved"))
+        notes = str(resume_value.get("notes", ""))
+    else:
+        decision = str(resume_value)
+        notes = ""
+    return {"decision": decision, "notes": notes}
 
 
 def build_graph(checkpointer=None):

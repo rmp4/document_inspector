@@ -8,9 +8,13 @@ _checkpointer_cm = None
 
 
 def _get_database_url() -> str:
-    return os.environ.get(
+    url = os.environ.get(
         "DATABASE_URL", "postgresql://docling:docling@localhost:5432/docling"
     )
+    if "connect_timeout=" in url:
+        return url
+    separator = "&" if "?" in url else "?"
+    return f"{url}{separator}connect_timeout=3"
 
 
 async def init_checkpointer() -> AsyncPostgresSaver:

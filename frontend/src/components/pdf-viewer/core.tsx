@@ -14,11 +14,17 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 type PdfViewerProps = {
   fileUrl: string;
   boxes: Array<{ x: number; y: number; w: number; h: number }>;
+  pageNumber: number;
+  onPageChange: (page: number) => void;
 };
 
-export function PdfViewer({ fileUrl, boxes }: PdfViewerProps) {
+export function PdfViewer({
+  fileUrl,
+  boxes,
+  pageNumber,
+  onPageChange,
+}: PdfViewerProps) {
   const [numPages, setNumPages] = useState<number | null>(null);
-  const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.0);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,15 +54,15 @@ export function PdfViewer({ fileUrl, boxes }: PdfViewerProps) {
           </Button>
           <Button
             variant="outline"
-            onClick={() => setPageNumber((value) => Math.max(1, value - 1))}
+            onClick={() => onPageChange(Math.max(1, pageNumber - 1))}
           >
             Prev
           </Button>
           <Button
             variant="outline"
             onClick={() =>
-              setPageNumber((value) =>
-                numPages ? Math.min(numPages, value + 1) : value + 1
+              onPageChange(
+                numPages ? Math.min(numPages, pageNumber + 1) : pageNumber + 1
               )
             }
           >

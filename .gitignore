@@ -1,6 +1,7 @@
 AGENTS.md
 docs/tasks/backlog.md
 .env
+.serena/
 *.egg-info/
 .venv/
 __pycache__/
