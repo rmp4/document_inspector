@@ -6,7 +6,11 @@ requires-python = ">=3.12"
 dependencies = [
   "docling>=2.0",
   "fastapi>=0.125",
+  "langfuse>=2.0",
+  "langgraph>=1.0.5",
+  "langgraph-checkpoint-postgres>=3.0.2",
   "pydantic>=2.10",
+  "asyncpg>=0.29",
   "python-multipart>=0.0.9",
   "python-dotenv>=1.0",
   "psycopg[binary]>=3.1",
