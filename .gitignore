@@ -2,3 +2,13 @@ AGENTS.md
 docs/tasks/backlog.md
 .env
 *.egg-info/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.uv/
+node_modules/
+.next/
+dist/
+build/
