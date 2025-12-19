@@ -1,0 +1,18 @@
+[project]
+name = "document-inspector"
+version = "0.1.0"
+description = "Docling Audit Agent backend"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.125",
+  "pydantic>=2.10",
+  "python-dotenv>=1.0",
+  "uvicorn[standard]>=0.30",
+]
+
+[tool.uv]
+dev-dependencies = [
+  "httpx>=0.27",
+  "pytest>=8.0",
+  "ruff>=0.7",
+]
