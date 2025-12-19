@@ -26,7 +26,13 @@ export default function Home() {
         </header>
 
         <section className="grid gap-8 lg:grid-cols-[2fr,1fr]">
-          <PdfViewer fileUrl="/sample.pdf" />
+          <PdfViewer
+            fileUrl="/sample.pdf"
+            boxes={[
+              { x: 72, y: 120, w: 260, h: 22 },
+              { x: 72, y: 170, w: 320, h: 22 },
+            ]}
+          />
           <aside className="rounded-3xl border border-white/40 bg-white/70 p-6 text-sm text-slate-600 shadow-xl backdrop-blur">
             <h2 className="text-lg font-semibold text-slate-900">
               Active Highlights

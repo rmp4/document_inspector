@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 
 import { Button } from "@/components/ui/button";
+import { BboxOverlay } from "@/components/pdf-viewer/overlay";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -12,10 +13,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 type PdfViewerProps = {
   fileUrl: string;
-  boxes?: Array<{ x: number; y: number; w: number; h: number }>;
+  boxes: Array<{ x: number; y: number; w: number; h: number }>;
 };
 
-export function PdfViewer({ fileUrl }: PdfViewerProps) {
+export function PdfViewer({ fileUrl, boxes }: PdfViewerProps) {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.0);
@@ -88,6 +89,7 @@ export function PdfViewer({ fileUrl }: PdfViewerProps) {
                 renderAnnotationLayer={false}
               />
             </Document>
+            <BboxOverlay boxes={boxes} scale={scale} />
           </div>
         )}
       </div>
