@@ -20,6 +20,7 @@ def create_app() -> FastAPI:
 
     @app.on_event("startup")
     def preload_models() -> None:
+        init_db()
         get_converter()
 
     app.include_router(api_router, prefix="/api/v1")
@@ -27,3 +28,4 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
+from app.core.database import init_db
